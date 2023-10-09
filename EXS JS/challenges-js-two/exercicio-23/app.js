@@ -6,6 +6,7 @@
 */
 
 const myString = '    JS      '
+console.log(myString.trim()) 
 
 /*
   02
@@ -22,6 +23,10 @@ const people = [
   { firstName: 'Felipe', lastName: 'Tavares', score: 71 },
   { firstName: 'Eric', lastName: 'Silva', score: 82 }
 ]
+const peopleOrdered = people.slice()
+
+peopleOrdered.sort((a,b) => a.score - b.score)
+console.log(peopleOrdered)
 
 /*
   03
@@ -35,12 +40,18 @@ const people = [
 
 const animals = ['cão', 'gato', 'boi', 'leão', 'gnu', 'alce', 'ema']
 
+const newArray = animals.filter(animal => animal.length == 3)
+console.log(newArray)
+
 /*
   04
 
   - Baseado no array "animals", gere um novo array com a quantidade de letras do 
     nome de cada animal. Ex.: [6, 8, 2].
 */
+const otherArray = animals.map(animal => animal.length)
+
+console.log(otherArray)
 
 
 
@@ -60,7 +71,9 @@ const friends = [
   { id: 5, name: 'Solange', nearMe: false }
 ]
 
+const arrayFriends = friends.filter(validation => validation.nearMe == true).map(people => people.name)
 
+console.log(arrayFriends)
 
 /*
   06
@@ -71,6 +84,9 @@ const friends = [
 
 const numbers = [46, 86, 212, 29, 51, 9, 25, 42, 81]
 
+const arrayNumbers = numbers.filter(number => number % 2 == 1).reduce((acumulator,numberOdd) => acumulator + numberOdd)
+
+console.log(arrayNumbers)
 /*
   07
 
@@ -91,3 +107,8 @@ const data = [{
   country: 'Indonesia',
   population: 263991379
 }]
+
+const arraySumPeople = data.filter(countries => countries.country !== 'China').reduce((acumulator,people) => acumulator += people.population ,0)
+
+console.log(arraySumPeople)
+

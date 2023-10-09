@@ -11,6 +11,21 @@
   - Após implementar a função, implemente outra versão da função. Essa 2ª 
     versão deve fazer o mesmo que a função anterior faz, mas de forma diferente.
 */
+function inverseString(string){
+    const stringReverse = string.split('').reverse().join('')
+    return console.log(stringReverse)
+}
+inverseString('abc')
+
+function inverseString2(string){
+    let textoInvertido = ''
+    for(let i = string.length - 1; i >= 0; i--){
+        textoInvertido += string[i]
+       
+    }
+    return console.log(textoInvertido)
+}
+inverseString2('opa')
 
 /*
   02
@@ -26,8 +41,11 @@ numbers.forEach(number => {
     foundNumber = true
   }
 })
-
 console.log(foundNumber)
+//
+const numeroEncontrado = numbers.some(number => number === 15)
+console.log(numeroEncontrado)
+
 
 /*
   03

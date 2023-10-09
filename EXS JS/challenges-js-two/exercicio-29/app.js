@@ -12,6 +12,69 @@
     - Os requests devem ser sequenciais. Ou seja, um request só deve ser 
       executado quando o request anterior for finalizado.
 */
+// function getPokemon(url, callback) {
+//     fetch(url)
+//       .then((response) => {
+//         if (!response.ok) {
+//           throw new Error('Não foi possível obter o Pokémon');
+//         }
+//         return response.json();
+//       })
+//       .then((data) => {
+//         const pokemonName = data.name;
+//         console.log(`Pokémon obtido: ${pokemonName}`);
+//         callback();
+//       })
+//       .catch((error) => {
+//         console.error(error.message);
+//         callback();
+//       });
+//   }
+  
+//   const pokemonNames = ['bulbasaur', 'charmander', 'squirtle'];
+  
+//   function fetchSequentially(pokemonNames, index = 0) {
+//     if (index < pokemonNames.length) {
+//       const url = `https://pokeapi.co/api/v2/pokemon/${pokemonNames[index]}`;
+      
+//       getPokemon(url, function () {
+//         fetchSequentially(pokemonNames, index + 1);
+//       });
+//     }
+//   }
+  
+//   // Inicie o processo
+//   fetchSequentially(pokemonNames);
+const pokemonNames = ['bulbasaur', 'charmander', 'squirtle'];
+async function fetchAllPokemon(pokemonNames){ 
+    async function getPokemon(url){
+    try{
+        const response = await fetch(url)
+        if(!response.ok){throw new Error("Não foi possivel obter o Pokemon")}
+        const json =await response.json()
+        const pokemonName = json.name
+        console.log(`Pokémon Obtido:${pokemonName}`)
+        return pokemonName
+    
+    }
+    catch(error){
+        console.error(`Não foi possível fazer o fetch ${error}`)
+    }
+}
+{
+    for (const name of pokemonNames) {
+        const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
+        try {
+            await getPokemon(url);
+        } catch (error) {
+            // Lidar com o erro aqui, por exemplo, registrar o Pokémon que falhou
+            console.error(`Falha ao obter o Pokémon ${name}: ${error.message}`);
+        }
+    }
+}
+}
+fetchAllPokemon(pokemonNames)
+
 
 /*
   02
@@ -31,6 +94,19 @@
         08;
     2) Pesquisar no MDN.
 */
+function map(array, callback){
+    const newArray = []
+    for(let i = 0; i < array.length; i++){
+        const resultado = (callback(array[i]))
+        newArray.push(resultado)
+    }
+    return console.log(newArray)
+}
+map([1, 2, 3], number => number * 2) // [2, 4, 6];
+map([1, 2, 3], number => number * 3) // [3, 6, 9];
+
+
+
 
 /*
   03
@@ -41,10 +117,11 @@
 
 const person = {
   name: 'Roger',
-  getName: () => this.name
+  getName: function(){
+    return this.name
+  } 
 }
-
-// console.log(person.getName())
+ console.log(person.getName())
 
 /*
   04
@@ -56,7 +133,9 @@ const person = {
 */
 
 const x = 'x'
-// const x = 'y'
+function toExistOnlyHere(){
+    const x = 'y'
+}
 
 /*
   05
@@ -64,16 +143,18 @@ const x = 'x'
   - O código abaixo está funcionando. Refatore-o da forma mais concisa que você 
     conseguir.
 */
-
+//Solução 1
 const getFullName = (user) => {
-  const firstName = user.firstName
-  const lastName = user.lastName
-
-  return `${firstName} ${lastName}`
+ return `${user.firstName} ${user.lastName}`
 }
 
-console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
-
+console.log(getFullName({firstName: 'Afonso',lastName: 'Solano'}))
+// Solução 2
+const getFullName2 = (user) => {
+    const { firstName, lastName } = user; // Usar a desestruturação para simplificar
+    return `${firstName} ${lastName}`;
+  };
+  
 /*
   06
 
@@ -87,7 +168,28 @@ console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
     a mensagem 'Não temos o equivalente hexadecimal para COR';
   - Exiba o hexadecimal de 8 cores diferentes usando a função criada acima.
 */
-
+function convertToHex(colorName) {
+    const colorHexMap = {
+      red: '#FF0000',
+      green: '#00FF00',
+      blue: '#0000FF',
+      yellow: '#FFFF00',
+      purple: '#800080',
+      cyan: '#00FFFF',
+      magenta: '#FF00FF',
+      orange: '#FFA500'
+    };
+    if(colorName.toLowerCase() in colorHexMap){
+        const colorValue = colorHexMap[colorName.toLowerCase()]
+        return console.log(`O hexadecimal para a cor ${colorName} é ${colorValue}`)
+    }
+    else {
+        return console.log(`Não temos o equivalente hexadecimal para ${colorName}`);
+    }
+}
+convertToHex('red')
+convertToHex('green')
+convertToHex('blueWhite')
 
 /*
   07
@@ -112,3 +214,16 @@ const people = [
   { id: 9 , name: 'Gabriel', age: 20, federativeUnit: 'São Paulo' },
   { id: 73, name: 'Aline', age: 19, federativeUnit: 'Brasília' }
 ]
+
+const ageFrequency = {};
+
+for (const person of people) {
+  const age = person.age;
+  if (ageFrequency[age]) {
+    ageFrequency[age]++;
+  } else {
+    ageFrequency[age] = 1;
+  }
+}
+
+console.log(ageFrequency)

@@ -7,7 +7,31 @@
   - Implemente uma segunda função que exibe, no console, seus dados de usuário 
     do GitHub.
 */
+const url = 'https://api.github.com/users/ThiagoTavaresDev'
 
+function requestData(){
+    fetch(url).then((response) =>{
+        if(!response.ok){
+            throw new Error(`algo deu errado ${response.status}`)
+        }
+        return response.json()
+    }).then((data) =>{
+       return console.log(data)
+    })
+}
+requestData()
+// outro meio de conseguir os mesmos dados, utilizando async await
+async function request2(){
+    try{
+    const response = await fetch(url)
+    const data = await response.json()
+    return console.log(data)
+    }
+    catch{
+        throw new Error('Deu ruim chefe')
+    }
+}
+request2()
 /*
   02
 
@@ -17,6 +41,18 @@
 */
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+const newArray = []
+numbers.map((item) =>{
+    if(item % 2 == 0){
+     return newArray.push(item)
+    }
+    if(item % 3 == 0){
+     return newArray.push(item)
+    }
+})
+console.log(newArray);
+
 
 /*
   03
@@ -31,6 +67,10 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     - Natália => "PNaPtáPlia";
     - Rafaela => "PRaPfaPePla".
 */
+const myLettersName = ['Thi','a','go']
+
+const languageP = 'P' + myLettersName.join('P')
+console.log(languageP)
 
 /*
   04
@@ -46,6 +86,12 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   Dica: pesquise pelo método split.
 */
+const firstName = 'Thiago'
+const nameSplited = firstName.split('')
+for(let i = 0; i < nameSplited.length; i++){
+    console.log(`${nameSplited[i]} é a posição ${i + 1}`)
+}
+
 
 /*
   05
@@ -59,6 +105,17 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   Dica: pesquise pelo método Object.keys().
 */
+
+const object = {
+    name: 'Thiago',
+    lastName: 'Tavares',
+    age: 18,
+    
+}
+console.log(Object.keys(object))
+
+
+
 
 /*
   06
@@ -75,9 +132,19 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60]
 
+function howOften(array, number){
+    let resultado = 0
+    for(let i = 0; i < array.length; i++){
+        if(array[i] == number){
+           resultado++
+        }
+    }
+    return console.log(resultado)
+}
+howOften(scores,100)
+
 /*
   07
-
   - Já implementamos o método some e o método map, do zero;
   - Neste exercício, seu desafio será criar o método filter, do zero;
   - Implemente uma função "filter" que possui a mesma funcionalidade do método  
@@ -98,3 +165,18 @@ const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60]
   Dica: lembre-se que o método filter inclui o item em questão no novo array 
   que está sendo gerado **apenas** se a função retorna um valor truthy.
 */
+function filter(array, callback){
+        let arrayFiltered = []
+        for(let i = 0; i < array.length; i++){
+        if(callback(array[i], i, array)){
+          arrayFiltered.push(array[i])
+        }
+        }
+        return arrayFiltered
+}
+console.log(filter([1,2,3], item => item))
+console.log(filter([0, 1, 2], item => item))
+console.log(filter([1, 2, 3], item => item < 2))
+console.log(filter([1, 2, 3, 5], (item, index) => item === index + 1))
+console.log(filter([1, 2, 3, 2, 1, 5], (item, index, array) =>
+index === array.indexOf(item)))

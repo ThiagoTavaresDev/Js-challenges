@@ -6,6 +6,16 @@
   - Não utilize a date-fns.
 */
 
+const data = new Date()
+
+function organizeDate(data){
+    const string = (`${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`)
+    console.log(string)
+    
+}
+organizeDate(data)
+
+
 /*
   02
 
@@ -13,6 +23,15 @@
     data na formatação: "03:07 - domingo, 7 de junho de 2020";
   - Não utilize a date-fns.
 */
+const otherData = new Date()
+function recieveDate(data){
+    const quarta = 3
+    const string = (`${data.getHours()}:${data.getMinutes()} - quarta, ${data.getDate()} de Setembro de ${data.getFullYear()}`)
+    console.log(string)
+
+}
+recieveDate(otherData)
+// para nao ficar de maneira manual os dados eu teria que criar um array para os meses e para os dias, assim eu poderia pegar corretamente conforme a data atual
 
 /*
   03
@@ -23,6 +42,11 @@
 */
 
 const user = { id: 42, isVerified: true }
+
+const {id, isVerified} = user
+
+console.log(id, isVerified)
+
 
 /*
   04
@@ -37,6 +61,11 @@ const user = { id: 42, isVerified: true }
 const robotA = { name: 'Bender' }
 const robotB = { name: 'HAL 9000' }
 
+const nameA = robotA.name
+console.log(nameA)
+const nameB = robotB.name
+console.log(nameB)
+
 /*
   05
 
@@ -49,6 +78,13 @@ const robotB = { name: 'HAL 9000' }
 const a = 'a'
 const b = 'b'
 const c = 'c'
+
+const object = {
+    a,
+    b,
+    c,
+}
+console.log(object)
 
 /*
   06
@@ -70,9 +106,9 @@ const updateSomething = (data = {}) => {
   }
 
   useDataSomewhereElse({
-    target: target,
-    property: property,
-    willChange: willChange
+    target,
+    property,
+    willChange,
   })
 }
 
@@ -103,3 +139,5 @@ const updateClock = () => {
 }
 
 setInterval(updateClock, 1000)
+
+// consigo imaginar uma maneira de refatorar deixando o código menor porém seria de uma maneira a deixar quase tudo a respeito da datação numa única string,

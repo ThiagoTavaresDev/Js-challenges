@@ -20,6 +20,29 @@
   
   Dica: pesquise pelo método "insertAdjacentElement", no MDN;
 */
+const input = document.querySelector('#username')
+const formField = document.querySelector('fieldset')
+const regex = /[a-zA-Z]/
+const paragrafo = document.createElement('p')
+input.addEventListener('keyup', () =>{
+    if(input.value.length > 6 && regex.test(input.value)){
+        paragrafo.classList.add("username-success-feedback")
+        paragrafo.classList.remove('username-help-feedback')
+        paragrafo.textContent = `Nome de usuário válido =)`
+        paragrafo.classList.remove('submit-help-feedback')
+        paragrafo.classList.remove('submit-success-feedback')
+        formField.insertAdjacentElement('afterend', paragrafo)
+        
+    }
+    else{
+        paragrafo.classList.add("username-help-feedback")
+        paragrafo.classList.remove('username-success-feedback')
+        paragrafo.textContent = `Nome de usuário inválido ;(`
+        paragrafo.classList.remove('submit-help-feedback')
+        paragrafo.classList.remove('submit-success-feedback')
+        formField.insertAdjacentElement('afterend', paragrafo)
+    }
+})
 
 /*
   02
@@ -32,6 +55,26 @@
   - Use as classes disponíveis no arquivo style.css para colorir o parágrafo;
   - Não insira o parágrafo manualmente no index.html.
 */
+
+const form =  document.querySelector('form')
+const button = document.querySelector('button')
+ form.addEventListener('submit', (e) =>{
+    if(input.value.length > 6 && regex.test(input.value)){
+        paragrafo.classList.add("submit-success-feedback")
+        paragrafo.classList.remove('submit-help-feedback')
+        paragrafo.textContent = `Dados enviados =)`
+        formField.insertAdjacentElement("afterend", paragrafo)
+    
+    }
+    else{
+        paragrafo.classList.add("submit-help-feedback")
+        paragrafo.classList.remove('submit-success-feedback')
+        paragrafo.textContent = `Não foi possível enviar seus dados ;(`
+        formField.insertAdjacentElement("afterend", paragrafo)
+    }
+   e.preventDefault()
+})
+
 
 /*
   03
@@ -50,3 +93,27 @@
         6;
     2) Pesquisar no MDN.
 */
+
+function some(array, callback){
+    for(let i = 0; i < array.length; i++){
+        if(callback(array[i])){
+            return true
+        }
+    }
+    return false
+}
+console.log(some([1 , 2] ,function(item){return item > 2 })) // false
+console.log(some([1 , 2, 3] , item => item > 2)) // true
+console.log(some([1 , 3, 5] ,function(item){return item === 0 })) // false
+
+// exemplo uso some real
+//const arrayTest = [1,3,5,7,8]
+//const value = arrayTest.some(numero => numero % 2 == 0)
+//console.log(value)
+
+//const arrayTest2 = [1,2,3,5]
+//function isOdd(number){
+//return number % 2 == 1
+//}
+//const value2 = arrayTest2.some(isOdd)
+//console.log(value2)

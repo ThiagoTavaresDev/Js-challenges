@@ -3,18 +3,32 @@
 
   - Implemente um código assíncrono entre os console.log() abaixo.
 */
+setTimeout(() =>{
+    console.log('Linha 1')
+   
+    
+    
+},1000)
+setTimeout(() =>{
+    console.log('Linha 2')
+   
+    
+    
+},2000)
+setTimeout(() =>{
+  
+    console.log('Linha 3')
+    
+    
+},3000)
+setTimeout(() =>{
+    console.log('Linha 4')
+   
+    
+    
+},4000)
 
-console.log('Linha 1')
-console.log('Linha 2')
-console.log('Linha 3')
-console.log('Linha 4')
 
-
-
-console.log('Linha 5')
-console.log('Linha 6')
-console.log('Linha 7')
-console.log('Linha 8')
 
 /*
   02
@@ -27,7 +41,10 @@ function logGreeting (name) {
   console.log(`olá, ${name}`)
 }
 
-// x(logGreeting)
+setTimeout(() =>{
+    logGreeting('Thiago')
+
+},5000)
 
 /*
   03
@@ -35,10 +52,19 @@ function logGreeting (name) {
   - O código abaixo possui uma parte que pode ser isolada. Isole-a.
 */
 
-const numbers = [3, 4, 10, 20]
-const lesserThanFive = numbers.filter(num => num < 5)
 
+
+function filterNumberLessFive(num) {
+   return num.filter(num => num < 5)
+}
+
+const numbers = [3, 4, 10, 20]
+const lesserThanFive = filterNumberLessFive(numbers)
+
+//const lesserThanFive = numbers.filter(num => num < 5)
 console.log(lesserThanFive)
+
+
 
 /*
   04
@@ -47,11 +73,14 @@ console.log(lesserThanFive)
 */
 
 const prices = [12, 19, 7, 209]
-let totalPrice = 0
 
-for (let i = 0; i < prices.length; i++) {
-  totalPrice += prices[i]
-}
+const totalPrice = prices.reduce((acumulator,number) =>{
+   return acumulator += number
+},0)
+
+//for (let i = 0; i < prices.length; i++) {
+// totalPrice += prices[i]
+//}
 
 console.log(`Preço total: ${totalPrice}`)
 
@@ -64,6 +93,10 @@ console.log(`Preço total: ${totalPrice}`)
 
 let car = { color: 'amarelo' }
 
+car = {color: 'azul'}
+
+console.log(car.color)
+
 /*
   06
 
@@ -73,6 +106,18 @@ let car = { color: 'amarelo' }
   - Se todos os argumentos forem passados, retorne a string 'A função foi 
     invocada com 3 argumentos'.
 */
+
+function forExercise(name = `A função deve ser invocada com pelo menos 3 argumentos`, otherName = `A função deve ser invocada com pelo menos 3 argumentos`, test = `A função deve ser invocada com pelo menos 3 argumentos`) {
+    if(name != `A função deve ser invocada com pelo menos 3 argumentos` && otherName != `A função deve ser invocada com pelo menos 3 argumentos` && test != `A função deve ser invocada com pelo menos 3 argumentos`){
+        return console.log('A função foi invocada com 3 argumentos parabéns')
+
+    }
+    else{
+        return console.log("A função deve ser invocada com 3 argumentos")
+    }
+}
+forExercise()
+
 
 /*
   07
@@ -98,5 +143,29 @@ let car = { color: 'amarelo' }
 
 let booksBox = {
   spaces: 5,
-  booksIn: 0
+  booksIn: 0,
+  addBooks: (quantityBooks) =>{
+    booksBox.booksIn += quantityBooks   // Adicionando livros 
+    if(booksBox.booksIn > booksBox.spaces){
+        return console.log(`você só tem mais ${booksBox.spaces - quantityBooks} espaços insira outro valor`)
+      }
+    if(booksBox.booksIn < booksBox.spaces){
+        return console.log(`Já há ${booksBox.booksIn} livros na caixa`)
+      
+    }
+    if(booksBox.booksIn == booksBox.spaces || booksBox.booksIn > booksBox.spaces){
+    
+        return console.log(`A caixa já está cheia`)
+      
+    }
+  
+  }
+
 }
+
+
+booksBox.addBooks(3)
+booksBox.addBooks(4)
+
+
+

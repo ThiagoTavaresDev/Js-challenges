@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    
+    background: linear-gradient(114deg, rgba(57,2,162,1) 19%, rgba(139,44,203,1) 91%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    width: 600px;
+    height: 500px;
+    border-radius: 10px;
+    background-color: white;
+}
+.contain-top{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    color:rgb(88, 28, 199)
+}
+.quiz{
+    margin-top: 10px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    width: 500px;
+    height: 400px;
+   
+}
+
+.main-header-title{
+    
+    width: 100%;
+    margin-top: 20px;
+    
+}
+.main-header-title h1{
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 22px;
+    color:rgb(88, 28, 199);
+    word-break: break-all;
+   
+}
+.contain-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+button{
+    border: none;
+    border-radius: 5px;
+    width: 90%;
+    padding: 10px;
+    cursor: pointer;
+    outline: 1px solid grey;
+    background: white;
+    font-size: 16px;
+    color: rgb(44, 44, 44);
+}
+button:hover{
+    background-color: rgba(88, 28, 199, 0.336);
+
+}
+.correct{
+    background-color: rgb(168, 236, 168);
+
+}
+.remove{
+    display: none;
+
+}
+.addFinal{
+    display: none;
+    font-size: 32px;
+    margin-top: 160px;
+}
+@media (max-width: 600px){
+    button:hover{
+        background-color: white;
+
+    }
+    .contain-top{
+        background-color: white;
+        border-radius: 5px;
+        
+    }
+    .container{
+        width: 360px;
+        background-color: transparent;
+    }
+   
+    .addFinal{
+        font-size: 36px;
+        margin: 100px 50px 0px 50px;
+        
+    }
+    .quiz{
+        margin: 10px;
+        background-color: white;
+    }
+
+}

@@ -12,7 +12,7 @@ const numbers = [50, 100, 50]
 
 const sum = (x, y, z) => x + y + z
 
-console.log(sum(numbers))
+console.log(sum(...numbers))
 
 /*
   02
@@ -22,6 +22,9 @@ console.log(sum(numbers))
   - Utilizando (também) o spread operator, exiba no console o seu nome com 
     apenas a primeira letra maiúscula.
 */
+const nomeMinusculo = ['thiago']
+const nomeSliced = nomeMinusculo.toString().slice(1,6)
+console.log(...nomeMinusculo.join('')[0].toUpperCase().concat(nomeSliced))
 
 /*
   03
@@ -34,10 +37,13 @@ console.log(sum(numbers))
 
 const randomNumber = Math.round(Math.random() * 100)
 
+
+
 const obj = {
   a: 1,
   b: 2
 }
+randomNumber > 50 ? obj.c = 3 : obj.d = 4
 
 console.log(obj)
 
@@ -49,20 +55,24 @@ console.log(obj)
 */
 
 const h = w => {
-  w.d = 3
+  const copia = {...w}  
+  copia.d = 3
+  return copia
 }
 
 const q = f => {
-  h(f)
+ return h(f)
+  
 }
 
 const i = b => {
-  q(b)
+ return q(b)
 }
 
 const v = { k: 't' }
 
-i(v)
+const resultadoDaCopia = i(v)
+console.log(resultadoDaCopia)
 console.log(v)
 
 /*
@@ -95,6 +105,14 @@ const timestamps = [
     value: 17
   }
 ]
+const objetoNovo = {}
+
+timestamps.forEach((item) =>{
+    objetoNovo[item.date] = item.value
+
+})
+console.log(objetoNovo)
+
 
 /*
   06
@@ -115,10 +133,20 @@ const timestamps = [
   Dica 1: o método forEach é usado para executar efeitos colaterais;
   Dica 2: o método forEach nunca retorna um valor.
 */
+function myForEach(array,callback){
+    for(let i = 0; i < array.length; i++){
+        callback(array[i], i, array)
+    }
+}
+
 
 let accumulator = 0
 const oddNumbers = [51, 97, 65, 23]
 
+myForEach(oddNumbers, (number)=>{
+   return accumulator += number 
+})
+console.log(accumulator)
 /*
   07
 
@@ -147,3 +175,40 @@ const oddNumbers = [51, 97, 65, 23]
     3 No passo 3.4, se o slide exibido atualmente não corresponder ao index do 
       1º slide, o slide anterior deve ser exibido.
 */
+const btnNext = document.querySelector('[data-js="carousel__button--next"]')
+const btnPrev = document.querySelector('[data-js="carousel__button--prev"]')
+const carouselItem = document.querySelectorAll('[data-js="carousel__item"]')
+console.log(carouselItem)
+let index = 0
+
+btnPrev.addEventListener('click',()=>{
+    carouselItem.forEach((item) =>{
+        item.classList.remove('carousel__item--visible')
+        item.classList.add('carousel__item--hidden')
+    })
+    index--
+    if(index == -1){
+        index = 2 
+        carouselItem[index].classList.add('carousel__item--visible')
+    }
+    carouselItem[index].classList.add('carousel__item--visible')
+      
+})
+btnNext.addEventListener('click',() =>{
+ 
+    carouselItem.forEach((item) =>{
+        item.classList.remove('carousel__item--visible')
+        item.classList.add('carousel__item--hidden')
+    })
+    index++
+    if(index == 3){
+        index = 0 
+        carouselItem[index].classList.add('carousel__item--visible')
+    }
+    carouselItem[index].classList.add('carousel__item--visible')
+      
+
+})
+
+
+

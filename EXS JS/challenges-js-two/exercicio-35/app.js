@@ -5,6 +5,21 @@
     e retorna o valor da key parseado para objeto javascript.
 */
 
+function namedKey(key){
+   try{
+       const item = localStorage.getItem(key)
+       if(item == null){
+        return null
+    }
+       const parsedValue = JSON.parse(item)
+       return parsedValue
+   }
+   catch(error){
+    console.error('deu erro' + error)
+    return null
+   }
+}
+
 /*
   02
 
@@ -21,7 +36,7 @@
 const input = document.querySelector('[data-js="input"]')
 
 input.addEventListener('input', event => {
-  console.log(event.target.value)
+  console.log(event.target.valueAsNumber)
 })
 
 /*
@@ -38,6 +53,13 @@ input.addEventListener('input', event => {
   - Descomente o código abaixo. A primeira invocação da combineOperations deve 
     retornar 60 e a segunda invocação, 10.
 */
+function combineOperations(initialValue, array){
+    let valorFinal = initialValue
+    for(let i = 0; i < array.length; i++){
+      valorFinal = array[i](valorFinal)
+    }
+    return console.log(valorFinal)
+}
 
 function add100 (num) {
   return num + 100
@@ -59,8 +81,8 @@ function addTen (num) {
   return num + 10
 }
 
-// console.log(combineOperations(0, [add100, divByFive, multiplyByThree]))
-// console.log(combineOperations(0, [divByFive, multiplyFive, addTen]))
+console.log(combineOperations(0, [add100, divByFive, multiplyByThree]))
+console.log(combineOperations(0, [divByFive, multiplyFive, addTen]))
 
 /*
   04
@@ -101,10 +123,17 @@ const searchAlbum = {
   genre: 'Rock'
 }
 
-if (albums.includes(searchAlbum)) {
-  console.log(`${JSON.stringify(searchAlbum)} existe no array albums.`)
-}
-
+const albumExists = albums.find(album => (
+    album.id === searchAlbum.id &&
+    album.title === searchAlbum.title &&
+    album.artist === searchAlbum.artist &&
+    album.price === searchAlbum.price &&
+    album.genre === searchAlbum.genre
+  ));
+  
+  if (albumExists) {
+    console.log(`${JSON.stringify(searchAlbum)} existe no array albums.`);
+  }
 /*
   05
 
@@ -121,7 +150,12 @@ const obj = {
   prop7: 7,
   prop8: { a: 'x', b: 'y' },
 }
-
+const copyObj = Object.assign({}, obj)
+console.log(copyObj)
+const copyObj2 = {...obj}
+console.log(copyObj2)
+const copyObj3 =  JSON.parse(JSON.stringify(obj))
+console.log(copyObj3)
 /*
   06
 
@@ -132,6 +166,24 @@ const obj = {
 
   Dica: pesquise por Object.entries.
 */
+
+const objetoAtributos = {
+    class: 'classeTeste',
+    id: 'identificador',
+    alt: 'textoAlternativo',
+    src: 'url'
+}
+const body = document.querySelector('body')
+function creatElement(element, properties){
+    const elemento = document.createElement(element)
+    for(const [key,value] of Object.entries(properties)){
+     elemento.setAttribute(key,value)
+    }
+    body.appendChild(elemento)
+}
+creatElement('p', objetoAtributos)
+creatElement('div', objetoAtributos)
+creatElement('div', objetoAtributos)
 
 /*
   07

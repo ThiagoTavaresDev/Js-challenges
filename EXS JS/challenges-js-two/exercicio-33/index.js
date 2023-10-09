@@ -6,3 +6,4 @@ const book = {
   publisher: 'Objetiva',
   price: 44.90
 }
+export{ book }

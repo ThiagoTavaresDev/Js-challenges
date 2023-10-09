@@ -15,7 +15,23 @@
     obter os dados do pokémon';
   - Teste também a verificação do item acima.
 */
+const choosePokemon = 'pikachu'
+const urlPoke = `https://pokeapi.co/api/v2/pokemon/${choosePokemon}`
 
+function puxarDados(){
+    fetch(urlPoke).then((response) =>{
+
+        if(response.ok){
+         console.log(`resposta bem sucedida ${response.status}`)
+        }
+
+        return response.json()
+    }).then((data) =>{
+        console.log(data.abilities[0].ability.name)
+        console.log(data.types[0].type.name)
+    })
+}
+puxarDados()
 /*
   02
 
@@ -31,6 +47,37 @@
     - Quantos metros você caminhou (number iniciado em 0).
 */
 
+const euObjeto = {
+    name: 'Thiago',
+    sobrenome: 'Tavares',
+    sexo:'Masculino',
+    idade : 18 ,
+    altura:  165,
+    peso: 47,
+    andou: false,
+    metrosCaminhados: 0,
+    addAge:() =>{
+        euObjeto.idade += 1
+    },
+    sumM: (value) =>{
+        euObjeto.metrosCaminhados += value
+        euObjeto.andou = true
+    },
+    completedString: () =>{
+        console.log(`Oi. Eu sou ${euObjeto.sexo == 'Masculino' ? 'o' : 'a'} ${euObjeto.name} tenho ${euObjeto.idade} ${euObjeto.idade == 1 ? 'ano' : 'anos'}, altura ${euObjeto.altura} metros de altura, peso ${euObjeto.peso} quilos e, só hoje eu já caminhei ${euObjeto.metrosCaminhados} metros`)
+    }
+
+
+}
+console.log(euObjeto.idade)
+console.log(euObjeto.addAge())
+console.log(euObjeto.addAge())
+console.log(euObjeto.addAge())
+console.log(euObjeto.addAge())
+console.log(euObjeto.addAge())
+console.log(euObjeto.idade)
+
+
 /*
   03
 
@@ -39,7 +86,6 @@
   - A cada vez que o método é invocado, 1 deve ser somado à idade atual;
   - Após criar o método, adicione 5 anos à idade do objeto.
 */
-
 /*
   04
 
@@ -50,6 +96,14 @@
   - Após criar o método, faça a pessoa caminhar alguns metros, invocando o 
     método 4x, com diferentes metragens passadas por parâmetro.
 */
+euObjeto.sumM(10)
+euObjeto.sumM(13)
+euObjeto.sumM(14)
+euObjeto.sumM(15)
+euObjeto.sumM(16)
+
+console.log(euObjeto.andou)
+console.log(euObjeto.metrosCaminhados)
 
 /*
   05
@@ -68,6 +122,11 @@
       "metro", no singular.
 */
 
+
+
+euObjeto.completedString()
+
+
 /*
   06
 
@@ -80,9 +139,26 @@
     - Faça isso até que 7 valores truthy sejam passados.
 */
 
+const funcao = (valor) =>{
+        return Boolean(valor)
+}
+console.log(funcao(''))
+console.log(funcao(0))
+console.log(funcao(undefined))
+console.log(funcao(null))
+console.log(funcao(false))
+console.log(funcao(NaN))
+console.log(funcao([]))
+console.log(funcao('String'))
+console.log(funcao(10))
+console.log(funcao({}))
+console.log(funcao(' '))
+console.log(funcao(Object.keys))
+console.log(funcao(true))
+
+
 /*
   07
-
   - Crie uma função que recebe um parâmetro, que será o nome de um livro;
   - Essa função deve conter um objeto com 3 propriedades, que são nomes de 
     livros;
@@ -98,3 +174,33 @@
 
   Dica: propriedades de objetos podem ser declaradas como strings.
 */
+function book(bookName){
+     const library ={
+        HarryPotter: {
+            pages : '254',
+            autor:'Jony Saladinha',
+            editora:'Editora Velha'
+        } ,
+        'SenhorDoAnéis': {
+            pages : '2524',
+            autor:'Pé de Couve',
+            editora:'Editora Nova'
+        } ,
+        'AliceNoPaísDasMaravilhas': {
+            pages : '25214',
+            autor:'Carlos Roberto',
+            editora:'Editora Média'
+        }
+    }
+    if (bookName) {
+        if (library[bookName]) {
+          return library[bookName];
+        } else {
+          return "Livro não encontrado na biblioteca";
+        }
+      } 
+      
+    
+ 
+}
+console.log(book('HarryPotter'))

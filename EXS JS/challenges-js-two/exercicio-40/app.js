@@ -1,3 +1,4 @@
+'strict-mode'
 /*
   01
 
@@ -5,7 +6,9 @@
   valores no console no decorrer dessa bateria de exercícios.
 */
 
-
+function show(parametro){
+    console.log(parametro)
+}
 
 /*
   02
@@ -21,13 +24,15 @@ const objs = [
   { c: 2333, a: 1321, b: 545 },
   { b: 993, c: 345, a: 781 }
 ]
-
+function removeProp(prop, obj){
+    if(obj.forEach((item) =>{
+        return delete item[prop]
+    })){
+    }
+}  
 const propToRemove = 'b'
-
-
-
-// removeProp(propToRemove, objs)
-
+show(removeProp(propToRemove, objs))
+console.log(objs)
 /*
 [
   {
@@ -62,10 +67,20 @@ const orders = [
   { username: '_rick', status: 'shipped', price: 73.65 }
 ]
 
-
-
-// getStatusCount(orders)
-
+function getStatusCount(orders) {
+    const statusCount = {};
+    for(let i = 0; i < orders.length; i++){
+        const status = orders[i].status
+        if(statusCount[status]){
+            statusCount[status]++
+        }
+        else{
+            statusCount[status] = 1
+        }
+    }
+    return statusCount
+  }
+  show(getStatusCount(orders))
 /*
 {
   pending: 2,

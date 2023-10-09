@@ -4,12 +4,25 @@
   - No envio do form, faça com que a página não seja recarregada.
 */
 
+const button = document.querySelector('button')
+button.addEventListener('click', (e) =>{
+    e.preventDefault()
+})
+
+
 /*
   02
 
   - No envio do form obtenha, através do objeto event, o texto inserido no  
     input e exiba-o no console.
 */
+
+button.addEventListener('click', (event) =>{
+    const input = document.querySelector('input')
+    console.log(input.value)
+
+})
+
 
 /*
   03
@@ -18,6 +31,11 @@
     index.html;
   - Exiba no console o boolean no qual este teste resulta.
 */
+
+const regex = /[a-z]/
+const paragrafo = document.querySelector('p')
+console.log(regex.test("documentation"))
+
 
 /*
   04
@@ -29,6 +47,11 @@
 
 const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta'
 
+const otherRegex = /[B][1-9]{2}/g
+
+let try1 = 'B99';
+console.log(otherRegex.test(B99message))
+
 /*
   05
 
@@ -37,7 +60,7 @@ const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 
 */
 
 const word = 'O que a NASA fotografou no dia do seu aniversário?'
-const NASARegex = /^[A-Z]{4}$/
+const NASARegex = /[A-Z]{4}/
 const NASAResult = NASARegex.test(word)
 
 console.log(NASAResult)
@@ -55,6 +78,18 @@ console.log(NASAResult)
     - "jozeti" não é um valor válido, pois contém 6 caracteres.
 */
 
+button.addEventListener('click', () =>{
+    const input = document.querySelector('input')
+    if(input.value.length >= 7){
+        console.log(`O valor inserido no input ${input.value} é válido =) value:${input.value.length}`)
+    }
+    else{
+        console.log(`${input.value} não é valido, pois precisa conter no mínimo 6 caracteres`)
+
+    }
+
+})
+
 /*
   07
 
@@ -66,3 +101,17 @@ console.log(NASAResult)
     - "0xY79aYx54e" é um valor válido, pois contém 11 letras e números;
     - "eich_1961" não é um valor válido, pois contém um caractere especial.
 */
+
+const outraRegex = /[0-9A-Za-z]*/
+
+button.addEventListener('click', () =>{
+    const input = document.querySelector('input')
+    if(input.value.length >= 7 && input.value.length <= 11 && outraRegex.test(input.value)){
+      console.log(`${input.value} é um valor válido pois contém ${input.value.length} letras e números`)
+    }
+    else{
+        console.log(`${input.value} não é valido, pois precisa conter no mínimo 7 a 11 caracteres e não ter caracter especial ${input.value.length}`)
+
+    }
+
+})

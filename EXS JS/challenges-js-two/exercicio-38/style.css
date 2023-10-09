@@ -1,15 +1,19 @@
 body {
   background-color: #F9FAFC;
+  
 }
 
 .container {
   padding-top: 7.5rem;
+  position: relative;
 }
 
 .converted-value {
   color: #452B4E;
+  
 }
 
 .conversion-precision {
   color: #452B4E;
 }
+

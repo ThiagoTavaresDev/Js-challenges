@@ -7,6 +7,19 @@
   - Se o request não estiver ok, exiba no console "Não foi possível obter os 
     dados dos usuários."
 */
+fetch('https://jsonplaceholder.typicode.com/users').then((response) =>{
+   if(!response.ok){
+    throw new Error('Deu erro meu cumpade')
+   }
+   const json = response.json()
+   json.then((data) =>{
+    console.log(data.forEach(value => console.log(value)))
+   })
+
+})
+
+
+
 
 /*
   02
@@ -21,6 +34,36 @@
     mensagem: "Resultado da operação: NUMERO_1 OPERADOR NUMERO_2 = RESULTADO."
   - Se o operador não for válido, retorne a mensagem "Operação inválida."
 */
+function calculator(symbol){
+    return function (n1,n2){
+    let resultado;    
+    switch(symbol){
+        case'+': {
+            return resultado = n1 + n2
+          
+        }
+        case'-': {
+            return  resultado = n1 - n2
+             
+        }
+        case'*': {
+            return  resultado = n1 * n2
+                
+            }
+           
+        case'/': {
+            return resultado = n1 / n2
+        }
+        default: return 'operação inválida'
+    }
+}
+}
+const using = calculator('*')
+console.log(using(3,6))
+
+
+
+
 
 /*
   03
@@ -35,6 +78,11 @@
   - Crie um novo array chamado `newSul`, que recebe somente os estados do sul,
     pegando do array `brasil`. Não remova esses itens de `brasil`.
 */
+const sudeste = ['São Paulo', 'Rio de Janeiro', 'Minas Gerais', 'Espirito Santo']
+const sul = ['Rio Grande do Sul', 'Santa Catarina', 'Paraná']
+const norte = ['Acre','Pará','Amazônia']
+const brasil = sudeste.concat(sul)
+brasil.unshift(...norte)
 
 /*
   04
@@ -54,7 +102,30 @@
     console: "Nem todos os estados tem mais de 7 letras.". Pesquise pelo método 
     every.
 */
+const nordeste = ['Maranhão', 'Piauí', 'Ceará', 'Rio Grande do Norte', 'Paraíba', 'Pernambuco', 'Alagoas', 'Sergipe','Bahia']
 
+const estadosSudesteRemovidos = brasil.splice(3, 4)
+console.log(estadosSudesteRemovidos)
+
+let newBrasil = []
+brasil.forEach((item, index) =>{
+    let obj = {
+    id: index,
+    estado: item
+    }
+    newBrasil.push(obj)
+    
+},
+)
+console.log(newBrasil)
+
+const result = newBrasil.every((item) => item.length > 7)
+if(result === true){
+     console.log('Sim todos os estados em questão tem mais de 7 letras')
+}
+else{
+     console.log('nem todos os estados em questão tem mais de 7 letras')
+}
 /*
   05
 
@@ -68,3 +139,25 @@
   - Filtre o array criado acima, retornando somente os estados que tiverem ID 
     par. Atribua este novo array à uma constante.
 */
+
+const existCeara = brasil.includes('Ceará')
+if(existCeara === true){
+    console.log('Existe')
+
+}
+else{
+    console.log('Não existe')
+}
+const novoArray = newBrasil.map((item) =>{
+   const novoId = item.id + 1
+   const novoEstado = `${item.estado} pertence ao Brasil`
+   return {id: novoId, estado: novoEstado}
+})
+console.log(novoArray)
+
+const arrayfiltered = novoArray.filter((item) =>{
+    if(item.id % 2 == 0){
+        return item
+    }
+})
+console.log(arrayfiltered)

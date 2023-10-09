@@ -75,7 +75,9 @@ modifyColors()
   P.s: a classe "body-background" já está declarada no style.css.
 */
 
+const body = document.querySelector('body')
 
+body.classList.add('body-background')
 
 /*
   05
@@ -85,7 +87,8 @@ modifyColors()
     do link do index.html.
 */
 
-
+const linkTag = document.querySelector('.link')
+linkTag.setAttribute('href', 'https://github.com/roger-melo-treinamentos/curso-de-js-roger-melo' )
 
 /*
   06
@@ -93,6 +96,7 @@ modifyColors()
   - Exiba o novo valor do atributo href do link no console.
 */
 
+console.log(`O link é ${linkTag.getAttribute("href")}`)
 
 
 /*
@@ -103,12 +107,14 @@ modifyColors()
 */
 
 
+console.log(window.getComputedStyle(mainTitle))
 
 /*
   08
 
   - Remova a classe "body-background", do elemento body.
 */
+body.classList.remove('body-background')
 
 
 
@@ -118,3 +124,5 @@ modifyColors()
   - Se o link da página possuir uma classe "link", remova-a;
   - Não utilize o método remove() para fazer isso.
 */
+    linkTag.setAttribute('class', '')
+

@@ -9,8 +9,21 @@
     diferentes para a propriedade color de cada carro;
   - Teste o método getColor do prototype dos carros.
 */
+class Carro {
+    constructor(modelo, marca, cor) {
+        this.modelo = modelo
+        this.marca = marca
+        this.cor = cor
+    }
+    getColor() {
+        return this.cor
+    }
+}
+const car1 = new Carro('Porsche','cara','preta')
+const car2 = new Carro('Ferrari','cara','azul')
 
-
+console.log(car1.getColor())
+console.log(car2.getColor())
 
 /*
   02
@@ -33,8 +46,10 @@ const movie = {
 function getSummary () {
   return `${this.title} foi dirigido por ${this.director} e tem ${this.starringRole} no papel principal.`
 }
+const summary = getSummary.call(movie)
 
-console.log(getSummary())
+
+console.log(summary)
 
 /*
   03
@@ -47,8 +62,15 @@ console.log(getSummary())
     }
   - Descomente o código e crie a função.
 */
+const arrayToObj = (array) => {
+    const obj = {}
+    for(const [key,value] of array){
+        obj[key] = value
+       
+    }
+    return obj
+}
 
-/*
 console.log(
   arrayToObj([
     ['prop1', 'value1'], 
@@ -56,7 +78,8 @@ console.log(
     ['prop3', 'value3']
   ])
 )
-*/
+
+
 
 /*
   04
@@ -86,43 +109,32 @@ const getFormattedTime = template => {
     .join(':')
 }
 
-class Clock {
-  constructor ({ template }) {
-    this.template = template
-  }
+function Clock({template, precision = 1000}) {
+ 
+  let timer;
 
-  render () {
-    const formattedTime = getFormattedTime(this.template)
+  function render () {
+    const formattedTime = getFormattedTime(template)
     console.log(formattedTime)
   }
 
-  start () {
-    const oneSecond = 1000
+  function start () {
 
-    this.render()
-    this.timer = setInterval(() => this.render(), oneSecond)
+    render()
+    timer = setInterval(() => render(), precision)
   }
 
-  stop () {
-    clearInterval(this.timer)
+  function stop () {
+    clearInterval(timer)
   }
-}
-
-class ExtendedClock extends Clock {
-  constructor (options) {
-    super(options)
-    
-    const { precision = 1000 } = options
-    this.precision = precision
-  }
-
-  start () {
-    this.render()
-    this.timer = setInterval(() => this.render(), this.precision)
+  return {
+    start,stop
   }
 }
 
-const clock = new ExtendedClock({ template: 'h:m:s', precision: 1000 })
+
+
+const clock = Clock({ template: 'h:m:s', precision: 1000 })
 
 // clock.start()
 
@@ -165,7 +177,34 @@ const clock = new ExtendedClock({ template: 'h:m:s', precision: 1000 })
         - download, com o valor 'table.csv'.
 */
 
+// const ourButton = document.querySelector('[data-js="export-table-btn"]')
 
+// ourButton.addEventListener('click', () => {
+// const trs = document.querySelectorAll('tr')
+// console.log(trs)
+// let dataFormated = ''
+// trs.forEach((item, itemIndex) =>{
+//     const itemsReal = item.cells
+//     for (let cellIndex = 0; cellIndex < itemsReal.length; cellIndex++) {
+//         dataFormated += itemsReal[cellIndex].textContent;
+        
+//         if (cellIndex < itemsReal.length - 1) {
+//           dataFormated += ',';
+//         }
+//       }
+//       if (itemIndex < trs.length - 1) {
+//         dataFormated += '\n'; // Adiciona quebra de linha após cada linha de dados
+//       }
+      
+// })
+
+// const csvContent = `data:text/csv;charset=utf-8,${encodeURIComponent(dataFormated)}`;
+// const downloadLink = document.createElement("a");
+//     downloadLink.setAttribute("href", csvContent);
+//     downloadLink.setAttribute("download", "ArquivinExcel.csv");
+//     downloadLink.click();
+    
+// })
 
 /*
   06
@@ -223,3 +262,32 @@ const clock = new ExtendedClock({ template: 'h:m:s', precision: 1000 })
   PS: o desafio aqui é você implementar essa aplicação sozinho(a), antes 
   de ver as próximas aulas, ok? =)
 */
+
+const ApiKey = '7096cdf92d3ca2a98b09d53d' 
+
+const input = document.querySelector('[data-js="currency-one-times"]')
+const select1 = document.querySelector('[data-js="currency-one"]')
+const select2 = document.querySelector('[data-js="currency-two"]')
+
+
+function reciveData(){
+    const paragraphUsedShow = document.querySelector('[data-js="converted-value"]')
+    const paragraphUsedforRate = document.querySelector('[data-js="conversion-precision"]')
+   
+    const url = `https://v6.exchangerate-api.com/v6/${ApiKey}/pair/${select1.value}/${select2.value}/${input.value}`
+    fetch(url).then((response) =>{
+        return response.json()
+    }).then((dataReceived) =>{
+        paragraphUsedShow.textContent = dataReceived.conversion_result.toFixed(3)
+        paragraphUsedforRate.textContent = dataReceived.conversion_rate.toFixed(3)
+        function show(){
+            paragraphUsedforRate.style.display = 'block'
+        }
+            setTimeout(show, 100)
+    })
+
+}
+reciveData()
+input.addEventListener('keyup',reciveData)
+select1.addEventListener('change',reciveData)
+select2.addEventListener('change',reciveData)

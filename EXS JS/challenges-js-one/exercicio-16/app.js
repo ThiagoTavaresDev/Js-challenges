@@ -14,9 +14,8 @@ elementsInsideDiv.forEach(element => {
   })
 })
 
-div.addEventListener('click', () => {
-  console.log('Clicou na div.')
-})
+
+
 
 /*
   02
@@ -26,6 +25,13 @@ div.addEventListener('click', () => {
     da div.".
 */
 
+elementsInsideDiv.forEach(element => {
+    element.addEventListener('click', () => {
+      console.log(`Clicou no filho da div. ${element.tagName.toLowerCase()}`)
+    })
+  })
+
+
 /*
   03
 
@@ -34,12 +40,33 @@ div.addEventListener('click', () => {
     filho da div, ao invés de ser exibida no console, seja inserida neste h2.
 */
 
+    const h2 = document.querySelector('h2')
+    div.addEventListener('click', () => {
+        h2.textContent = 'Clicou na div';
+        
+      });
+    elementsInsideDiv.forEach(element => {
+    element.addEventListener('click', () => {
+        h2.textContent = 'clicou no filho da div'  
+    })
+  })
+  
+
+
+
+
 /*
   04
 
   - Faça com que quando o texto do h2 for copiado, a mensagem "Texto copiado!"  
     seja exibida no console.
 */
+
+    h2.addEventListener('copy', () =>{
+        console.log('texto copiado')
+    })
+
+
 
 /*
   05
@@ -49,12 +76,31 @@ div.addEventListener('click', () => {
     "Eixo X: COORDENADA_EIXO_X | Eixo Y: COORDENADA_EIXO_Y".
 */
 
+const divEgg = document.querySelector('.egg')
+
+divEgg.addEventListener('mousemove', (event) =>{
+    const clientX = event.clientX
+    const clientY = event.clientY
+    console.log(`Eixo X:${clientX}, Eixo Y:${clientY}`)
+    
+})
+
+
+
 /*
   06
 
   - Modifique a cor do ovo para "lightgoldenrodyellow" quando o botão for 
     clicado.
 */
+
+
+const button = document.querySelector('button')
+
+button.addEventListener('click', () =>{
+    divEgg.style.background = 'lightgoldenrodyellow'
+})
+
 
 /*
   07
@@ -76,3 +122,10 @@ const people = [
   { id: 8, name: 'Matheus Manucci', profession: 'Piloto' },
   { id: 9, name: 'Hamilton Silva', profession: 'Advogado' }
 ]
+
+for(let i = 0; i < people.length; i++){
+    if(people[i].profession == 'Front-end developer'){
+        console.log(`contem no minimo um Front-end Developer`)
+    }
+
+}

@@ -20,3 +20,26 @@
       listados na documentação: https://developers.giphy.com/docs/api/endpoint#search
   - Ignore os avisos no console. Para limpá-lo, pressione "ctrl + L".
 */
+
+
+const button = document.querySelector('#btnSearch')
+const apiKey = 'MmlQ7JfCRjTMeWQ4j3ShubHOKtyGfR4K'
+const input = document.querySelector('#search')
+const divOut = document.querySelector('.out')
+// https://api.giphy.com/v1/gifs/search?api_key=[SUA_CHAVE_DA_API_AQUI]&limit=1&q=[VALOR_INSERIDO_NO_INPUT]
+button.addEventListener('click',(e) =>{
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=1&q=${input.value}`
+
+    fetch(url).then((response) =>{
+         return response.json()
+    }).then((data) =>{
+     console.log(data) 
+     const img = document.createElement('img')
+     img.setAttribute('src', data.data[0].images.downsized.url)
+     img.setAttribute('alt', ' ')
+     divOut.append(img)
+
+    })
+    
+    e.preventDefault()
+})

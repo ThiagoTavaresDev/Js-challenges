@@ -16,11 +16,17 @@
       array que contenha 2 números e com um outro que contenha 4 números.
 */
 
-const numbers = [50, 100, 50]
+const numbers = [50, 100, 50, 210]
+const numbers2 = [50, 100]
 
-const sum = (x, y, z) => x + y + z
+const sum = (...numbers) => {
+    return numbers.reduce((accumulator,item) => accumulator += item,0)
 
+}
 console.log(sum(...numbers))
+console.log(sum(...numbers2))
+
+
 
 /*
   02
@@ -35,8 +41,14 @@ console.log(sum(...numbers))
   - Para que o item do accordion seja "ativado" ao clicar, faça um toogle 
     utilizando a classe "active".
 */
-
-
+    const accordionHeader = document.querySelectorAll('.accordion-header')
+    const accordionBody = document.querySelectorAll('.accordion-body')
+    
+    accordionHeader.forEach((item, index) => item.addEventListener('click',() =>{
+        item.classList.toggle('active')
+        accordionBody[index].classList.toggle('active')
+    }))
+  
 
 /*
   03
@@ -54,15 +66,26 @@ console.log(sum(...numbers))
     - Teste o método logCarInfo nos dois objetos.
 */
 
+function carMaker({name, color}){
+   const car = {
+    name: name,
+    color: color
+   }
+   Object.setPrototypeOf(car , volkswagenProto)
+   return car
+}
+
 const volkswagenProto = {
   logCarInfo () {
     console.log(`Volkswagen ${this.name}, cor ${this.color}.`)
   }
 }
 
-// const amarok = carMaker({ name: 'Amarok', color: 'preta' })
-// const jetta = carMaker({ name: 'Jetta', color: 'prata' })
 
+const amarok = carMaker({ name: 'Amarok', color: 'preta' })
+const jetta = carMaker({ name: 'Jetta', color: 'prata' })
+amarok.logCarInfo()
+jetta.logCarInfo()
 /*
   04
 
@@ -79,9 +102,20 @@ const volkswagenProto = {
 
 const aString = 'O Curso de JavaScript Roger Melo funciona com turmas fechadas, abertas poucas vezes e é focado em quem ainda não é fluente em JS. Ou seja, quem não consegue construir aplicações web com JavaScript puro.'
 
+const getIndexesOfCharacter = (string, character) =>{
+    const indexs = []
+    for(let i = 0; i < string.length; i++){
+        if(string[i] === character){
+            indexs.push(i)
+        }
+    }
+    return indexs
+}
 
 
-// console.log(getIndexesOfCharacter(aString, 'b'))
+
+
+ console.log(getIndexesOfCharacter(aString, 'b'))
 
 /*
   05
@@ -125,7 +159,32 @@ const aString = 'O Curso de JavaScript Roger Melo funciona com turmas fechadas, 
       Se essa condição for verdadeira, faça messageIndex receber o valor que 
       ela já tem + 1 e faça characterIndex receber 0.
 */
+ const messages = ['Thiago Tavares','Desenvolvedor Front-end']
+ let messageIndex = 0
+ let characterIndex=0
+ let currentMessage = ''
+ let currentCharacters = ''
 
+ function type(){
+   
+    if(messageIndex === messages.length){
+        messageIndex = 0
+        
+    }
+    
+     currentMessage = messages[messageIndex]
+     currentCharacters = currentMessage.slice(0, characterIndex + 1);
+     const h1 = document.querySelector('[data-js="typing"]')
+     h1.textContent = currentCharacters
+     characterIndex++
+       
+    if(currentCharacters == currentMessage){
+        messageIndex++
+        characterIndex = 0
+    }
+    
+ }
+ setInterval(type,200)
 
 
 /*
@@ -149,8 +208,6 @@ const wrongDataFormat = [
   'azul-P'
 ]
 
-
-
 /*
   {
     preto: {
@@ -171,4 +228,22 @@ const wrongDataFormat = [
       P: 1
     }
   }
-*/
+*/  
+
+const correctDataFormat = {};
+
+wrongDataFormat.forEach(item => {
+  const [cor, tamanho] = item.split('-');
+  
+  if (!correctDataFormat[cor]) {
+    correctDataFormat[cor] = {};
+  }
+  
+  if (!correctDataFormat[cor][tamanho]) {
+    correctDataFormat[cor][tamanho] = 0;
+  }
+  
+  correctDataFormat[cor][tamanho]++;
+});
+
+console.log(correctDataFormat);

@@ -4,8 +4,9 @@
   - Ao descomentar o código abaixo, um erro será lançado;
   - Solucione esse problema sem declarar uma constante "book".
 */
+import {book} from './index.js'
 
-// console.log(book)
+console.log(book)
 
 /*
   02
@@ -16,6 +17,13 @@
     - O 2º item é o 1º item do array recebido por argumento;
   - Implemente a função da forma mais concisa que você conseguir.
 */
+const usedLikeArgument = [1, 2, 3]
+function invoked(array){
+    const newArr = [array[2],array[0],array[1]]
+    return console.log(newArr)
+}
+invoked(usedLikeArgument)
+
 
 /*
   03
@@ -29,7 +37,8 @@ const topics = [
   { id: 2, name: 'Negócios & finanças'},
   { id: 3, name: 'Carreiras'}
 ]
-
+const {name} = topics[2]
+console.log(name)
 /*
   04
 
@@ -39,6 +48,12 @@ const topics = [
 */
 
 const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
+
+const [,[red,green,blue]] = colors
+console.log(red)
+console.log(green)
+console.log(blue)
+
 
 /*
   05
@@ -53,9 +68,13 @@ const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
     - Atribua "desconhecido" como valor default da const do destructuring;
     - Faça a função retornar "Olá, meu nome é [NOME]!".
 */
+function greet(object, string){
+    const {[string]: valor = 'Desconhecido'} = object
+    return `Ola, meu nome é ${valor}`
+}
 
-// console.log(greet({ name: 'Roger' }, 'name'))
-// console.log(greet({}, 'personName'))
+console.log(greet({name: 'Roger' }, 'name'))
+console.log(greet({}, 'personName'))
 
 /*
   06
@@ -69,6 +88,9 @@ const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
   - Não é necessário implementar condicionais, objetos, ou arrays para fazer
     isso.
 */
+
+
+
 
 /*
   07
